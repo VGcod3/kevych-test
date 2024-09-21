@@ -12,7 +12,7 @@ async function bootstrap() {
     .setTitle('Railway Backend API Documentation')
     .setDescription(' API description')
     .setVersion('1.0')
-    .addServer('http://localhost:3000/', 'Local environment')
+    .addServer('http://localhost:5000/', 'Local environment')
 
     .build();
   const document = SwaggerModule.createDocument(app, config);

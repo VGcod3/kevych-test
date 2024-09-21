@@ -4,8 +4,9 @@ import { User } from '@prisma/client';
 import { hash } from 'argon2';
 import { ValidatorService } from 'src/validator/validator.service';
 import { PrismaService } from '../prisma/prisma.service';
-import { AuthDto } from './dto/auth.dto';
+import { RegisterDto } from './dto/register.dto';
 import { capitalize } from 'src/utils/capitalize';
+import { LoginDto } from './dto/login.dto';
 
 @Injectable()
 export class AuthService {
@@ -15,7 +16,7 @@ export class AuthService {
     private validator: ValidatorService,
   ) {}
 
-  async register(dto: AuthDto) {
+  async register(dto: RegisterDto) {
     await this.validator.validateEmailUnique(dto.email);
 
     const user = await this.prisma.user.create({
@@ -35,7 +36,7 @@ export class AuthService {
     };
   }
 
-  async login(dto: AuthDto) {
+  async login(dto: LoginDto) {
     const user = await this.validator.validateCredentials(dto);
     const tokens = this.generateTokens(user.id);
 
@@ -61,6 +62,7 @@ export class AuthService {
     return {
       user: this.returnUserFields(user),
       accessToken: tokens.accessToken,
+      refreshToken: tokens.refreshToken,
     };
   }
 
@@ -85,7 +87,7 @@ export class AuthService {
     const accessToken = this.jwt.sign(
       { id },
       {
-        expiresIn: '20s',
+        expiresIn: '15m',
       },
     );
 

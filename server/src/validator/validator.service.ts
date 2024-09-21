@@ -5,7 +5,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { verify } from 'argon2';
-import { AuthDto } from 'src/auth/dto/auth.dto';
+import { LoginDto } from 'src/auth/dto/login.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { ReturnUserObject } from 'src/user/return-user.object';
 
@@ -26,7 +26,7 @@ export class ValidatorService {
     return user;
   }
 
-  async validateCredentials(dto: AuthDto) {
+  async validateCredentials(dto: LoginDto) {
     const user = await this.prisma.user.findUnique({
       where: {
         email: dto.email,
