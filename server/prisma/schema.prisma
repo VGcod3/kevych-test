@@ -22,3 +22,21 @@ model User {
 
   @@map("user")
 }
+
+model Route {
+  id          String     @id @default(cuid()) @map("_id")
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime   @updatedAt @map("updated_at")
+
+  name        String
+  price       Float
+
+  departure   String
+  start       DateTime
+  destination String
+  end         DateTime
+
+  duration    Int
+
+  @@map("route")
+}

@@ -1,32 +1,17 @@
-import { Header } from "../components/Header";
-import { Footer } from "../components/Footer";
-import { Cta } from "../components/Cta";
-import { Testimonial } from "../components/Testimonial";
-import { PopularRoutes } from "../components/PopularRoutes";
-import { HowItWorks } from "../components/HowItWorks";
-import { Features } from "../components/Feature";
-import { Hero } from "../components/Hero";
+import { Header } from "../components/root/Header";
+import { Hero } from "../components/root/Hero";
+import PrivateWrapper from "@/hooks/usePrivateRoute";
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Header />
+    <PrivateWrapper>
+      <div className="min-h-screen">
+        <Header />
 
-      <main>
-        <Hero />
-
-        <Features />
-
-        <HowItWorks />
-
-        <PopularRoutes />
-
-        <Testimonial />
-
-        <Cta />
-      </main>
-
-      <Footer />
-    </div>
+        <main>
+          <Hero />
+        </main>
+      </div>
+    </PrivateWrapper>
   );
 }

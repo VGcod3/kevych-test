@@ -1,25 +1,18 @@
-import { UserReq, UserRes } from "@/types/user/user.types";
-import axios from "axios";
-
-const API_URL = "http://localhost:5000/users";
-
-export const userApi = axios.create({
-  baseURL: API_URL,
-});
-
-userApi.defaults.headers.common["Content-Type"] = "application/json";
+import { User, UserRes } from "@/types/user/user.types";
+import { appApi } from "../http/index.api";
 
 export const getUserProfile = async () => {
-  const response = await userApi.get<UserRes>("/profile");
+  const response = await appApi.get<UserRes>("/users/profile");
+
   return response.data;
 };
 
-export const updateUserProfile = async (data: UserReq) => {
-  const response = await userApi.put<UserRes>("/profile", data);
+export const updateUserProfile = async (data: User) => {
+  const response = await appApi.put<UserRes>("/users/profile", data);
   return response.data;
 };
 
-export const deleteUserProfile = async (data: UserReq) => {
-  const response = await userApi.put<UserRes>("/profile", data);
+export const deleteUserProfile = async (data: User) => {
+  const response = await appApi.put<UserRes>("/users/profile", data);
   return response.data;
 };

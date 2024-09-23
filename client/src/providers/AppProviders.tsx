@@ -1,18 +1,19 @@
 "use client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { AuthProvider } from "./AuthProvider";
+import { Provider } from "react-redux";
+import { store } from "@/store/store";
+import { LoadingProvider } from "./LoadingProvider";
+
 // Create a client
 const queryClient = new QueryClient();
 
-export const QueryClientProviderWrapper = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>{children}</AuthProvider>
+      <Provider store={store}>
+        <LoadingProvider>{children}</LoadingProvider>
+      </Provider>
     </QueryClientProvider>
   );
 };

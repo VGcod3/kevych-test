@@ -47,7 +47,7 @@ export class ValidatorService {
   }
 
   async validateEmailUnique(email: string) {
-    const userWithSameEmail = await this.prisma.user.findFirst({
+    const userWithSameEmail = await this.prisma.user.findUnique({
       where: {
         email,
       },

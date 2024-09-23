@@ -11,8 +11,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { LoginReq } from "@/types/auth/auth.login.types";
+import { RegisterReq } from "@/types/auth/auth.register.types";
 
-export const PasswordField = ({ control }: { control: Control<LoginReq> }) => {
+export const PasswordField = ({
+  control,
+}: {
+  control: Control<RegisterReq | LoginReq>;
+}) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const Eye = showPassword ? EyeOffIcon : EyeIcon;
@@ -46,7 +51,11 @@ export const PasswordField = ({ control }: { control: Control<LoginReq> }) => {
   );
 };
 
-export const EmailField = ({ control }: { control: Control<LoginReq> }) => {
+export const EmailField = ({
+  control,
+}: {
+  control: Control<RegisterReq | LoginReq>;
+}) => {
   return (
     <FormField
       control={control}
@@ -54,6 +63,25 @@ export const EmailField = ({ control }: { control: Control<LoginReq> }) => {
       render={({ field }) => (
         <FormItem>
           <FormLabel>Email</FormLabel>
+          <FormControl>
+            <Input type={"text"} {...field} />
+          </FormControl>
+
+          <FormMessage />
+        </FormItem>
+      )}
+    />
+  );
+};
+
+export const NameField = ({ control }: { control: Control<RegisterReq> }) => {
+  return (
+    <FormField
+      control={control}
+      name={"name"}
+      render={({ field }) => (
+        <FormItem>
+          <FormLabel>Name</FormLabel>
           <FormControl>
             <Input type={"text"} {...field} />
           </FormControl>

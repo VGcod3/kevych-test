@@ -1,12 +1,12 @@
 import { z } from "zod";
 
-export const userReqSchema = z.object({
+export const userScema = z.object({
   id: z.string(),
   email: z.string(),
   name: z.string(),
 });
 
-export type UserReq = z.infer<typeof userReqSchema>;
+export type User = z.infer<typeof userScema>;
 
 export const userResSchema = z.object({
   id: z.string(),
